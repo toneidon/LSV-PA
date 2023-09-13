@@ -1,0 +1,24 @@
+.model mul
+.inputs a1 a0 b1 b0
+.outputs y3 y2 y1 y0
+.names a0 b0 y0
+11 1
+.names a0 b1 v1
+11 1
+.names a1 b0 v2
+11 1
+.names a1 b1 v3
+11 1
+.subckt adder a=v1 b=v2 y=y1 c=c1
+.subckt adder a=c1 b=v3 y=y2 c=y3
+.end
+
+.model adder
+.inputs a b
+.outputs y c
+.names a b y
+01 1
+10 1
+.names a b c
+11 1
+.end
