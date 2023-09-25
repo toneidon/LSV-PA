@@ -1,0 +1,37 @@
+.ilb a1 a0 b1 b0
+.ob y3 y2 y1 y0
+.model and2
+  .inputs a b
+  .outputs z
+  00 0
+  01 0
+  10 0
+  11 1
+.end
+.model or2
+  .inputs a b
+  .outputs z
+  00 0
+  01 1
+  10 1
+  11 1
+.end
+.model flipflop
+  .inputs D CLK
+  .outputs Q
+  .latch D CLK
+.end
+.subckt and2 a=a1 b=b1 z=x0
+.subckt and2 a=a1 b=b0 z=x1
+.subckt and2 a=a0 b=b1 z=x2
+.subckt and2 a=a0 b=b0 z=x3
+.subckt or2 a=x0 b=x1 z=o0
+.subckt or2 a=x2 b=x3 z=o1
+.subckt flipflop D=o0 CLK=CLK Q=y0
+.subckt flipflop D=o1 CLK=CLK Q=y1
+.subckt and2 a=y1 b=1 z=x4
+.subckt and2 a=y0 b=1 z=x5
+.subckt or2 a=x4 b=x5 z=o2
+.subckt flipflop D=o2 CLK=CLK Q=y2
+.subckt and2 a=y1 b=y0 z=x6
+.subckt flipflop D=x6 CLK=CLK Q=y3
